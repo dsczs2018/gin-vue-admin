@@ -1,7 +1,7 @@
 package service
 
 type ServiceGroup struct {
-	EmailService
+    EmailService
 }
 
 var ServiceGroupApp = new(ServiceGroup)

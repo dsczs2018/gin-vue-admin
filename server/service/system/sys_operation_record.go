@@ -1,10 +1,10 @@
 package system
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	systemReq "github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
+    "github.com/flipped-aurora/gin-vue-admin/server/global"
+    "github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
+    "github.com/flipped-aurora/gin-vue-admin/server/model/system"
+    systemReq "github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
 )
 
 //@author: [granty1](https://github.com/granty1)
@@ -16,8 +16,8 @@ import (
 type OperationRecordService struct{}
 
 func (operationRecordService *OperationRecordService) CreateSysOperationRecord(sysOperationRecord system.SysOperationRecord) (err error) {
-	err = global.GVA_DB.Create(&sysOperationRecord).Error
-	return err
+    err = global.GVA_DB.Create(&sysOperationRecord).Error
+    return err
 }
 
 //@author: [granty1](https://github.com/granty1)
@@ -28,8 +28,8 @@ func (operationRecordService *OperationRecordService) CreateSysOperationRecord(s
 //@return: err error
 
 func (operationRecordService *OperationRecordService) DeleteSysOperationRecordByIds(ids request.IdsReq) (err error) {
-	err = global.GVA_DB.Delete(&[]system.SysOperationRecord{}, "id in (?)", ids.Ids).Error
-	return err
+    err = global.GVA_DB.Delete(&[]system.SysOperationRecord{}, "id in (?)", ids.Ids).Error
+    return err
 }
 
 //@author: [granty1](https://github.com/granty1)
@@ -39,8 +39,8 @@ func (operationRecordService *OperationRecordService) DeleteSysOperationRecordBy
 //@return: err error
 
 func (operationRecordService *OperationRecordService) DeleteSysOperationRecord(sysOperationRecord system.SysOperationRecord) (err error) {
-	err = global.GVA_DB.Delete(&sysOperationRecord).Error
-	return err
+    err = global.GVA_DB.Delete(&sysOperationRecord).Error
+    return err
 }
 
 //@author: [granty1](https://github.com/granty1)
@@ -50,8 +50,8 @@ func (operationRecordService *OperationRecordService) DeleteSysOperationRecord(s
 //@return: err error, sysOperationRecord model.SysOperationRecord
 
 func (operationRecordService *OperationRecordService) GetSysOperationRecord(id uint) (err error, sysOperationRecord system.SysOperationRecord) {
-	err = global.GVA_DB.Where("id = ?", id).First(&sysOperationRecord).Error
-	return
+    err = global.GVA_DB.Where("id = ?", id).First(&sysOperationRecord).Error
+    return
 }
 
 //@author: [granty1](https://github.com/granty1)
@@ -62,25 +62,25 @@ func (operationRecordService *OperationRecordService) GetSysOperationRecord(id u
 //@return: err error, list interface{}, total int64
 
 func (operationRecordService *OperationRecordService) GetSysOperationRecordInfoList(info systemReq.SysOperationRecordSearch) (err error, list interface{}, total int64) {
-	limit := info.PageSize
-	offset := info.PageSize * (info.Page - 1)
-	// 创建db
-	db := global.GVA_DB.Model(&system.SysOperationRecord{})
-	var sysOperationRecords []system.SysOperationRecord
-	// 如果有条件搜索 下方会自动创建搜索语句
-	if info.Method != "" {
-		db = db.Where("method = ?", info.Method)
-	}
-	if info.Path != "" {
-		db = db.Where("path LIKE ?", "%"+info.Path+"%")
-	}
-	if info.Status != 0 {
-		db = db.Where("status = ?", info.Status)
-	}
-	err = db.Count(&total).Error
-	if err != nil {
-		return
-	}
-	err = db.Order("id desc").Limit(limit).Offset(offset).Preload("User").Find(&sysOperationRecords).Error
-	return err, sysOperationRecords, total
+    limit := info.PageSize
+    offset := info.PageSize * (info.Page - 1)
+    // 创建db
+    db := global.GVA_DB.Model(&system.SysOperationRecord{})
+    var sysOperationRecords []system.SysOperationRecord
+    // 如果有条件搜索 下方会自动创建搜索语句
+    if info.Method != "" {
+        db = db.Where("method = ?", info.Method)
+    }
+    if info.Path != "" {
+        db = db.Where("path LIKE ?", "%"+info.Path+"%")
+    }
+    if info.Status != 0 {
+        db = db.Where("status = ?", info.Status)
+    }
+    err = db.Count(&total).Error
+    if err != nil {
+        return
+    }
+    err = db.Order("id desc").Limit(limit).Offset(offset).Preload("User").Find(&sysOperationRecords).Error
+    return err, sysOperationRecords, total
 }

@@ -1,21 +1,21 @@
 package request
 
 import (
-	"github.com/dgrijalva/jwt-go"
-	uuid "github.com/satori/go.uuid"
+    "github.com/dgrijalva/jwt-go"
+    uuid "github.com/satori/go.uuid"
 )
 
 // Custom claims structure
 type CustomClaims struct {
-	BaseClaims
-	BufferTime int64
-	jwt.StandardClaims
+    BaseClaims
+    BufferTime int64
+    jwt.StandardClaims
 }
 
 type BaseClaims struct {
-	UUID        uuid.UUID
-	ID          uint
-	Username    string
-	NickName    string
-	AuthorityId string
+    UUID        uuid.UUID
+    ID          uint
+    Username    string
+    NickName    string
+    AuthorityId string
 }

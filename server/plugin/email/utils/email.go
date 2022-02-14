@@ -1,14 +1,14 @@
 package utils
 
 import (
-	"crypto/tls"
-	"fmt"
-	"net/smtp"
-	"strings"
+    "crypto/tls"
+    "fmt"
+    "net/smtp"
+    "strings"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/plugin/email/global"
+    "github.com/flipped-aurora/gin-vue-admin/server/plugin/email/global"
 
-	"github.com/jordan-wright/email"
+    "github.com/jordan-wright/email"
 )
 
 //@author: [maplepie](https://github.com/maplepie)
@@ -18,8 +18,8 @@ import (
 //@return: error
 
 func Email(To, subject string, body string) error {
-	to := strings.Split(To, ",")
-	return send(to, subject, body)
+    to := strings.Split(To, ",")
+    return send(to, subject, body)
 }
 
 //@author: [SliverHorn](https://github.com/SliverHorn)
@@ -29,11 +29,11 @@ func Email(To, subject string, body string) error {
 //@return: error
 
 func ErrorToEmail(subject string, body string) error {
-	to := strings.Split(global.GlobalConfig.To, ",")
-	if to[len(to)-1] == "" { // 判断切片的最后一个元素是否为空,为空则移除
-		to = to[:len(to)-1]
-	}
-	return send(to, subject, body)
+    to := strings.Split(global.GlobalConfig.To, ",")
+    if to[len(to)-1] == "" { // 判断切片的最后一个元素是否为空,为空则移除
+        to = to[:len(to)-1]
+    }
+    return send(to, subject, body)
 }
 
 //@author: [maplepie](https://github.com/maplepie)
@@ -43,8 +43,8 @@ func ErrorToEmail(subject string, body string) error {
 //@return: error
 
 func EmailTest(subject string, body string) error {
-	to := []string{global.GlobalConfig.From}
-	return send(to, subject, body)
+    to := []string{global.GlobalConfig.From}
+    return send(to, subject, body)
 }
 
 //@author: [maplepie](https://github.com/maplepie)
@@ -54,29 +54,29 @@ func EmailTest(subject string, body string) error {
 //@return: error
 
 func send(to []string, subject string, body string) error {
-	from := global.GlobalConfig.From
-	nickname := global.GlobalConfig.Nickname
-	secret := global.GlobalConfig.Secret
-	host := global.GlobalConfig.Host
-	port := global.GlobalConfig.Port
-	isSSL := global.GlobalConfig.IsSSL
+    from := global.GlobalConfig.From
+    nickname := global.GlobalConfig.Nickname
+    secret := global.GlobalConfig.Secret
+    host := global.GlobalConfig.Host
+    port := global.GlobalConfig.Port
+    isSSL := global.GlobalConfig.IsSSL
 
-	auth := smtp.PlainAuth("", from, secret, host)
-	e := email.NewEmail()
-	if nickname != "" {
-		e.From = fmt.Sprintf("%s <%s>", nickname, from)
-	} else {
-		e.From = from
-	}
-	e.To = to
-	e.Subject = subject
-	e.HTML = []byte(body)
-	var err error
-	hostAddr := fmt.Sprintf("%s:%d", host, port)
-	if isSSL {
-		err = e.SendWithTLS(hostAddr, auth, &tls.Config{ServerName: host})
-	} else {
-		err = e.Send(hostAddr, auth)
-	}
-	return err
+    auth := smtp.PlainAuth("", from, secret, host)
+    e := email.NewEmail()
+    if nickname != "" {
+        e.From = fmt.Sprintf("%s <%s>", nickname, from)
+    } else {
+        e.From = from
+    }
+    e.To = to
+    e.Subject = subject
+    e.HTML = []byte(body)
+    var err error
+    hostAddr := fmt.Sprintf("%s:%d", host, port)
+    if isSSL {
+        err = e.SendWithTLS(hostAddr, auth, &tls.Config{ServerName: host})
+    } else {
+        err = e.Send(hostAddr, auth)
+    }
+    return err
 }

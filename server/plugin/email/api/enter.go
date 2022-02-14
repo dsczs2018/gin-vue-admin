@@ -1,7 +1,7 @@
 package api
 
 type ApiGroup struct {
-	EmailApi
+    EmailApi
 }
 
 var ApiGroupApp = new(ApiGroup)

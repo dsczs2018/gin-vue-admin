@@ -1,11 +1,11 @@
 package system
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/config"
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	"github.com/flipped-aurora/gin-vue-admin/server/utils"
-	"go.uber.org/zap"
+    "github.com/flipped-aurora/gin-vue-admin/server/config"
+    "github.com/flipped-aurora/gin-vue-admin/server/global"
+    "github.com/flipped-aurora/gin-vue-admin/server/model/system"
+    "github.com/flipped-aurora/gin-vue-admin/server/utils"
+    "go.uber.org/zap"
 )
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -16,7 +16,7 @@ import (
 type SystemConfigService struct{}
 
 func (systemConfigService *SystemConfigService) GetSystemConfig() (err error, conf config.Server) {
-	return nil, global.GVA_CONFIG
+    return nil, global.GVA_CONFIG
 }
 
 // @description   set system config,
@@ -27,12 +27,12 @@ func (systemConfigService *SystemConfigService) GetSystemConfig() (err error, co
 //@return: err error
 
 func (systemConfigService *SystemConfigService) SetSystemConfig(system system.System) (err error) {
-	cs := utils.StructToMap(system.Config)
-	for k, v := range cs {
-		global.GVA_VP.Set(k, v)
-	}
-	err = global.GVA_VP.WriteConfig()
-	return err
+    cs := utils.StructToMap(system.Config)
+    for k, v := range cs {
+        global.GVA_VP.Set(k, v)
+    }
+    err = global.GVA_VP.WriteConfig()
+    return err
 }
 
 //@author: [SliverHorn](https://github.com/SliverHorn)
@@ -41,20 +41,20 @@ func (systemConfigService *SystemConfigService) SetSystemConfig(system system.Sy
 //@return: server *utils.Server, err error
 
 func (systemConfigService *SystemConfigService) GetServerInfo() (server *utils.Server, err error) {
-	var s utils.Server
-	s.Os = utils.InitOS()
-	if s.Cpu, err = utils.InitCPU(); err != nil {
-		global.GVA_LOG.Error("func utils.InitCPU() Failed", zap.String("err", err.Error()))
-		return &s, err
-	}
-	if s.Rrm, err = utils.InitRAM(); err != nil {
-		global.GVA_LOG.Error("func utils.InitRAM() Failed", zap.String("err", err.Error()))
-		return &s, err
-	}
-	if s.Disk, err = utils.InitDisk(); err != nil {
-		global.GVA_LOG.Error("func utils.InitDisk() Failed", zap.String("err", err.Error()))
-		return &s, err
-	}
+    var s utils.Server
+    s.Os = utils.InitOS()
+    if s.Cpu, err = utils.InitCPU(); err != nil {
+        global.GVA_LOG.Error("func utils.InitCPU() Failed", zap.String("err", err.Error()))
+        return &s, err
+    }
+    if s.Rrm, err = utils.InitRAM(); err != nil {
+        global.GVA_LOG.Error("func utils.InitRAM() Failed", zap.String("err", err.Error()))
+        return &s, err
+    }
+    if s.Disk, err = utils.InitDisk(); err != nil {
+        global.GVA_LOG.Error("func utils.InitDisk() Failed", zap.String("err", err.Error()))
+        return &s, err
+    }
 
-	return &s, nil
+    return &s, nil
 }

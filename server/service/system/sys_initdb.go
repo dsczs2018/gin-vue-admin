@@ -1,14 +1,14 @@
 package system
 
 import (
-	"database/sql"
-	"fmt"
+    "database/sql"
+    "fmt"
 
-	adapter "github.com/casbin/gorm-adapter/v3"
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/example"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
+    adapter "github.com/casbin/gorm-adapter/v3"
+    "github.com/flipped-aurora/gin-vue-admin/server/global"
+    "github.com/flipped-aurora/gin-vue-admin/server/model/example"
+    "github.com/flipped-aurora/gin-vue-admin/server/model/system"
+    "github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
 )
 
 type InitDBService struct{}
@@ -18,38 +18,38 @@ type InitDBService struct{}
 // Author [SliverHorn](https://github.com/SliverHorn)
 // Author [songzhibin97](https://github.com/songzhibin97)
 func (initDBService *InitDBService) InitDB(conf request.InitDB) error {
-	switch conf.DBType {
-	case "mysql":
-		return initDBService.initMsqlDB(conf)
-	case "pgsql":
-		return initDBService.initPgsqlDB(conf)
-	default:
-		return initDBService.initMsqlDB(conf)
-	}
+    switch conf.DBType {
+    case "mysql":
+        return initDBService.initMsqlDB(conf)
+    case "pgsql":
+        return initDBService.initPgsqlDB(conf)
+    default:
+        return initDBService.initMsqlDB(conf)
+    }
 }
 
 // initTables 初始化表
 // Author [SliverHorn](https://github.com/SliverHorn)
 func (initDBService *InitDBService) initTables() error {
-	return global.GVA_DB.AutoMigrate(
-		system.SysApi{},
-		system.SysUser{},
-		system.SysBaseMenu{},
-		system.SysAuthority{},
-		system.JwtBlacklist{},
-		system.SysDictionary{},
-		system.SysAutoCodeHistory{},
-		system.SysOperationRecord{},
-		system.SysDictionaryDetail{},
-		system.SysBaseMenuParameter{},
+    return global.GVA_DB.AutoMigrate(
+        system.SysApi{},
+        system.SysUser{},
+        system.SysBaseMenu{},
+        system.SysAuthority{},
+        system.JwtBlacklist{},
+        system.SysDictionary{},
+        system.SysAutoCodeHistory{},
+        system.SysOperationRecord{},
+        system.SysDictionaryDetail{},
+        system.SysBaseMenuParameter{},
 
-		adapter.CasbinRule{},
+        adapter.CasbinRule{},
 
-		example.ExaFile{},
-		example.ExaCustomer{},
-		example.ExaFileChunk{},
-		example.ExaFileUploadAndDownload{},
-	)
+        example.ExaFile{},
+        example.ExaCustomer{},
+        example.ExaFileChunk{},
+        example.ExaFileUploadAndDownload{},
+    )
 }
 
 // createDatabase 创建数据库(mysql)
@@ -57,19 +57,19 @@ func (initDBService *InitDBService) initTables() error {
 // Author: [songzhibin97](https://github.com/songzhibin97)
 
 func (initDBService *InitDBService) createDatabase(dsn string, driver string, createSql string) error {
-	db, err := sql.Open(driver, dsn)
-	if err != nil {
-		return err
-	}
-	defer func(db *sql.DB) {
-		err = db.Close()
-		if err != nil {
-			fmt.Println(err)
-		}
-	}(db)
-	if err = db.Ping(); err != nil {
-		return err
-	}
-	_, err = db.Exec(createSql)
-	return err
+    db, err := sql.Open(driver, dsn)
+    if err != nil {
+        return err
+    }
+    defer func(db *sql.DB) {
+        err = db.Close()
+        if err != nil {
+            fmt.Println(err)
+        }
+    }(db)
+    if err = db.Ping(); err != nil {
+        return err
+    }
+    _, err = db.Exec(createSql)
+    return err
 }
