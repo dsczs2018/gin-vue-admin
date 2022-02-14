@@ -76,7 +76,6 @@ const showNext = () => {
 }
 
 const goDoc = () => {
-  window.open('https://www.gin-vue-admin.com/docs/first_master#3-init')
 }
 
 const out = ref(false)
