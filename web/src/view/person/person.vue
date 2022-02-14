@@ -41,48 +41,6 @@
               </p>
               <p class="person-info">这个家伙很懒，什么都没有留下</p>
             </div>
-            <div class="user-information">
-              <ul>
-                <li>
-                  <el-icon>
-                    <user />
-                  </el-icon>
-                  {{ userStore.userInfo.nickName }}
-                </li>
-                <el-tooltip
-                  class="item"
-                  effect="light"
-                  content="北京反转极光科技有限公司-技术部-前端事业群"
-                  placement="top"
-                >
-                  <li>
-                    <el-icon>
-                      <data-analysis />
-                    </el-icon>
-                    北京反转极光科技有限公司-技术部-前端事业群
-                  </li>
-                </el-tooltip>
-                <li>
-                  <el-icon>
-                    <video-camera />
-                  </el-icon>
-                  中国·北京市·朝阳区
-                </li>
-                <el-tooltip
-                  class="item"
-                  effect="light"
-                  content="GoLang/JavaScript/Vue/Gorm"
-                  placement="top"
-                >
-                  <li>
-                    <el-icon>
-                      <medal />
-                    </el-icon>
-                    GoLang/JavaScript/Vue/Gorm
-                  </li>
-                </el-tooltip>
-              </ul>
-            </div>
           </div>
         </div>
       </el-col>
