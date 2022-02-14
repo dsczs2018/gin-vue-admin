@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"crypto/md5"
-	"encoding/hex"
+    "crypto/md5"
+    "encoding/hex"
 )
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -12,7 +12,7 @@ import (
 //@return: string
 
 func MD5V(str []byte, b ...byte) string {
-	h := md5.New()
-	h.Write(str)
-	return hex.EncodeToString(h.Sum(b))
+    h := md5.New()
+    h.Write(str)
+    return hex.EncodeToString(h.Sum(b))
 }

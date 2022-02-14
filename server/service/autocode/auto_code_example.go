@@ -1,9 +1,9 @@
 package autocode
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/autocode"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/autocode/request"
+    "github.com/flipped-aurora/gin-vue-admin/server/global"
+    "github.com/flipped-aurora/gin-vue-admin/server/model/autocode"
+    "github.com/flipped-aurora/gin-vue-admin/server/model/autocode/request"
 )
 
 type AutoCodeExampleService struct{}
@@ -15,8 +15,8 @@ type AutoCodeExampleService struct{}
 //@return: err error
 
 func (autoCodeExampleService *AutoCodeExampleService) CreateAutoCodeExample(autoCodeExample autocode.AutoCodeExample) (err error) {
-	err = global.GVA_DB.Create(&autoCodeExample).Error
-	return err
+    err = global.GVA_DB.Create(&autoCodeExample).Error
+    return err
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -26,8 +26,8 @@ func (autoCodeExampleService *AutoCodeExampleService) CreateAutoCodeExample(auto
 //@return: err error
 
 func (autoCodeExampleService *AutoCodeExampleService) DeleteAutoCodeExample(autoCodeExample autocode.AutoCodeExample) (err error) {
-	err = global.GVA_DB.Delete(&autoCodeExample).Error
-	return err
+    err = global.GVA_DB.Delete(&autoCodeExample).Error
+    return err
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -37,8 +37,8 @@ func (autoCodeExampleService *AutoCodeExampleService) DeleteAutoCodeExample(auto
 //@return: err error
 
 func (autoCodeExampleService *AutoCodeExampleService) UpdateAutoCodeExample(autoCodeExample *autocode.AutoCodeExample) (err error) {
-	err = global.GVA_DB.Save(autoCodeExample).Error
-	return err
+    err = global.GVA_DB.Save(autoCodeExample).Error
+    return err
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -48,8 +48,8 @@ func (autoCodeExampleService *AutoCodeExampleService) UpdateAutoCodeExample(auto
 //@return: err error, autoCodeExample autocode.AutoCodeExample
 
 func (autoCodeExampleService *AutoCodeExampleService) GetAutoCodeExample(id uint) (err error, autoCodeExample autocode.AutoCodeExample) {
-	err = global.GVA_DB.Where("id = ?", id).First(&autoCodeExample).Error
-	return
+    err = global.GVA_DB.Where("id = ?", id).First(&autoCodeExample).Error
+    return
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -59,19 +59,19 @@ func (autoCodeExampleService *AutoCodeExampleService) GetAutoCodeExample(id uint
 //@return: err error, list interface{}, total int64
 
 func (autoCodeExampleService *AutoCodeExampleService) GetAutoCodeExampleInfoList(info request.AutoCodeExampleSearch) (err error, list interface{}, total int64) {
-	limit := info.PageSize
-	offset := info.PageSize * (info.Page - 1)
-	// 创建db
-	db := global.GVA_DB.Model(&autocode.AutoCodeExample{})
-	var autoCodeExamples []autocode.AutoCodeExample
-	// 如果有条件搜索 下方会自动创建搜索语句
-	if info.AutoCodeExampleField != "" {
-		db = db.Where("label LIKE ?", "%"+info.AutoCodeExampleField+"%")
-	}
-	err = db.Count(&total).Error
-	if err != nil {
-		return
-	}
-	err = db.Limit(limit).Offset(offset).Find(&autoCodeExamples).Error
-	return err, autoCodeExamples, total
+    limit := info.PageSize
+    offset := info.PageSize * (info.Page - 1)
+    // 创建db
+    db := global.GVA_DB.Model(&autocode.AutoCodeExample{})
+    var autoCodeExamples []autocode.AutoCodeExample
+    // 如果有条件搜索 下方会自动创建搜索语句
+    if info.AutoCodeExampleField != "" {
+        db = db.Where("label LIKE ?", "%"+info.AutoCodeExampleField+"%")
+    }
+    err = db.Count(&total).Error
+    if err != nil {
+        return
+    }
+    err = db.Limit(limit).Offset(offset).Find(&autoCodeExamples).Error
+    return err, autoCodeExamples, total
 }

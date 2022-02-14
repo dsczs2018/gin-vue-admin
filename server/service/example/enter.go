@@ -1,7 +1,7 @@
 package example
 
 type ServiceGroup struct {
-	ExcelService
-	CustomerService
-	FileUploadAndDownloadService
+    ExcelService
+    CustomerService
+    FileUploadAndDownloadService
 }

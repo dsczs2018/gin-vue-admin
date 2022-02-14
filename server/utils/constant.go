@@ -1,6 +1,6 @@
 package utils
 
 const (
-	ConfigEnv  = "GVA_CONFIG"
-	ConfigFile = "config.yaml"
+    ConfigEnv  = "GVA_CONFIG"
+    ConfigFile = "config.yaml"
 )
